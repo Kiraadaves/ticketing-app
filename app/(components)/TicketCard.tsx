@@ -26,7 +26,7 @@ const TicketCard = () => {
           </div>
         </div>
         <h4 className="text-[#25282B] text-2xl">Ticket Title</h4>
-        <hr className="h-px border-0 bg-[#FDC435] mb-2" />
+        <hr className="h-px border-0 bg-blue-950 mb-2" />
         <CardDescription className="whitespace-pre-wrap text-[#828282]">
           This is the ticket decription! Please do this ticket.
         </CardDescription>

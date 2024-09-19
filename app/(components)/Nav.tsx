@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faTicket } from "@fortawesome/free-solid-svg-icons";
 const Nav = () => {
   return (
-    <nav className="flex justify-between bg-[#FDC435] p-4">
+    <nav className="flex justify-between bg-blue-950 p-4">
       <div className="flex items-center space-x-4">
         <Link href="/">
           <FontAwesomeIcon icon={faHome} className="icon" />

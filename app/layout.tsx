@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={`${nunito.className} `}>
         <div className="flex flex-col h-screen max-h-screen">
           <Nav />
-          <div className="flex-grow overflow-y-auto bg-[#fffff] text-[#FDC435]">
+          <div className="flex-grow overflow-y-auto bg-[#fffff] text-blue-950">
             {children}
           </div>
         </div>

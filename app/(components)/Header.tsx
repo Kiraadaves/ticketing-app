@@ -5,8 +5,12 @@ const Header = () => {
     <div className="">
       <div className=" flex flex-col justify-center items-center py-4">
         {" "}
-        <h1 className="text-[#FDC435] font-bold text-[4rem]">Create a Ticket!</h1>
-        <p className="text-[#828282] font-medium text-4xl">Save your ticket in one-click</p>
+        <h1 className="text-blue-950 font-bold text-[4rem]">
+          Create a Ticket!
+        </h1>
+        <p className="text-[#828282] font-medium text-4xl">
+          Save your ticket in one-click
+        </p>
       </div>
     </div>
   );
