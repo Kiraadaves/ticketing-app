@@ -1,3 +1,5 @@
+import TicketForm from "@/app/(components)/TicketForm";
+
 interface TicketPageProps {
   params: {
     id: string;
@@ -5,7 +7,7 @@ interface TicketPageProps {
 }
 
 const TicketPage: React.FC<TicketPageProps> = ({ params }) => {
-  return <div>TicketPage {params.id}</div>;
+  return <TicketForm />;
 };
 
 export default TicketPage;

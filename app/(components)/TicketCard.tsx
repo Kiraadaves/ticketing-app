@@ -14,7 +14,7 @@ import Status from "./Status";
 
 const TicketCard = () => {
   return (
-    <Card className="w-[350px] flex flex-col rounded-[8px] shadow-lg p-3 m-2 hover:bg-[#fafafa]">
+    <Card className=" flex flex-col rounded-[8px] shadow-lg p-3 m-2 hover:bg-[#fafafa]">
       <CardHeader>
         <CardTitle>Create a Ticket</CardTitle>
       </CardHeader>

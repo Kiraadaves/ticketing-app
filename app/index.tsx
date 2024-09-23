@@ -6,7 +6,7 @@ const All = () => {
   return (
     <div className="p-5">
       <Header />
-      <div className="flex flex-col items-centerxsz lg:grid grid-cols-2 xl:grid-cols-4">
+      <div className="items-centerxsz lg:grid grid-cols-2 xl:grid-cols-4">
         <TicketCard />
         <TicketCard />
         <TicketCard />

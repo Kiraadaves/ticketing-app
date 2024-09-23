@@ -3,9 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .icon {
-  @apply text-xl text-[#ffffff] w-7 h-7;
+    @apply text-xl text-[#ffffff] w-7 h-7;
+  }
+}
+
+@layer base {
+  form {
+    @apply rounded-xl p-4;
+  }
+
+  label {
+    @apply mt-4;
+  }
+  input,
+  select,
+  textarea {
+    @apply m-1 rounded  bg-card p-1;
   }
 }
