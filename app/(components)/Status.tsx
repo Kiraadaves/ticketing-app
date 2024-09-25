@@ -13,7 +13,7 @@ const Status: React.FC<StatusProps> = ({ status }) => {
       case "started":
         color = "bg-yellow-200";
         return color;
-      case "not started":
+      case "Not Started":
         color = "bg-red-600";
         return color;
     }

@@ -1,20 +1,58 @@
 "use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
+
+export interface Ticket {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  priority: number;
+  progress: number;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 const EditTicket = () => {
+  const { id } = useParams();
+
   const startingTicketData = {
     title: "",
     description: "",
     priority: 1,
     progress: 0,
-    status: "not started",
+    status: "Not Started",
     category: "Hardware Problem",
   };
 
   const [formData, setFormData] = useState(startingTicketData);
   const [message, setMessage] = useState("");
   const router = useRouter();
+  const [data, setData] = useState<Ticket | null>(null);
+
+  useEffect(() => {
+    const fetchTickets = async () => {
+      console.log(id);
+      try {
+        const res = await fetch(`/api/tickets/${id}`, {
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch ticket");
+        }
+        const result = await res.json();
+        console.log(result);
+        setData(result);
+      } catch (error) {
+        console.error("Error loading tickets: ", error);
+      }
+    };
+
+    fetchTickets();
+  }, [id]);
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -32,7 +70,7 @@ const EditTicket = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("submit: ", formData);
-    const res = await fetch("/api/tickets", {
+    const res = await fetch("/api/tickets/edit", {
       method: "POST",
       body: JSON.stringify({ formData }),
       //@ts-ignore
@@ -189,7 +227,7 @@ const EditTicket = () => {
           />
           <label>Status</label>
           <select name="status" value={formData.status} onChange={handleChange}>
-            <option value="not started">Not Started</option>
+            <option value="Not Started">Not Started</option>
             <option value="started">Started</option>
             <option value="done">Done</option>
           </select>

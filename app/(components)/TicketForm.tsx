@@ -8,7 +8,7 @@ const TicketForm = () => {
     description: "",
     priority: 1,
     progress: 0,
-    status: "not started",
+    status: "Not Started",
     category: "Hardware Problem",
   };
 
@@ -189,7 +189,7 @@ const TicketForm = () => {
           />
           <label>Status</label>
           <select name="status" value={formData.status} onChange={handleChange}>
-            <option value="not started">Not Started</option>
+            <option value="Not Started">Not Started</option>
             <option value="started">Started</option>
             <option value="done">Done</option>
           </select>
