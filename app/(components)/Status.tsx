@@ -21,7 +21,7 @@ const Status: React.FC<StatusProps> = ({ status }) => {
   };
   return (
     <span
-      className={`inline-block rounded-full px-2 py-1 text-xs font-semibold text-[#ffffff] ${getStatusColor(
+      className={`inline-block rounded-[0.25rem] px-3 py-2 text-sm font-semibold text-[#ffffff] ${getStatusColor(
         status
       )}`}
     >
