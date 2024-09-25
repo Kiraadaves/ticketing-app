@@ -7,6 +7,7 @@ interface TicketPageProps {
 }
 
 const TicketPage: React.FC<TicketPageProps> = ({ params }) => {
+  
   return <TicketForm />;
 };
 
