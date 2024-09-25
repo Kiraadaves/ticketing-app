@@ -69,7 +69,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
         </div>
         <div className="ml-auto flex items-end gap-4">
           <Status status={ticket.status} />
-          <Link href={`/TicketPage/${ticket._id}`} className="rounded-[0.25rem] px-6 py-2 text-sm border font-semibold shadow-md">Edit</Link>
+          <Link href={`/ticket/edit-ticket/${ticket._id}`} className="rounded-[0.25rem] px-6 py-2 text-sm border font-semibold shadow-md">Edit</Link>
         </div>
       </CardFooter>
     </Card>

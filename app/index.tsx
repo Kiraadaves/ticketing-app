@@ -33,7 +33,6 @@ const All: React.FC = () => {
         }
         const result = await res.json();
         setData(result);
-        console.log("data: ", result.tickets);
       } catch (error) {
         console.error("Error loading tickets: ", error);
       }
@@ -41,7 +40,6 @@ const All: React.FC = () => {
 
     fetchTickets();
   }, []);
-  console.log("data: ", data?.tickets);
 
   const categories = Array.from(
     new Set(data?.tickets?.map(({ category }) => category) || [])
