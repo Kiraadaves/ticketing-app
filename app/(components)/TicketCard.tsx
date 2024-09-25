@@ -35,7 +35,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
   };
 
   const handleDelete = async (id: string) => {
-    const res = await fetch(`/api/tickets/${id}`, {
+    const res = await fetch(`/api/tickets/delete/${id}`, {
       method: "DELETE",
     });
     if (res.ok) {
