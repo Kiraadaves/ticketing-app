@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import TicketCard from "./(components)/TicketCard";
 import Header from "./(components)/Header";
+import { fetchTickets } from "./services/fetchTickets";
 
 export interface Ticket {
   _id: string;
@@ -23,22 +24,12 @@ const All: React.FC = () => {
   const [data, setData] = useState<TicketData | null>(null);
 
   useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        const res = await fetch("/api/tickets", {
-          cache: "no-store",
-        });
-        if (!res.ok) {
-          throw new Error("Failed to fetch tickets");
-        }
-        const result = await res.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error loading tickets: ", error);
-      }
+    const getAllTickets = async () => {
+      const result = await fetchTickets();
+      setData(result);
     };
 
-    fetchTickets();
+    getAllTickets();
   }, []);
 
   const categories = Array.from(

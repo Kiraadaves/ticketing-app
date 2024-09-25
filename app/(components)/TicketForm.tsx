@@ -2,7 +2,24 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
-const TicketForm = () => {
+
+export interface Ticket {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  priority: number;
+  progress: number;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface TicketFormProps {
+  ticket: Ticket;
+}
+const TicketForm: React.FC<TicketFormProps> = ({ ticket }) => {
+  const EDITMODE = ticket._id === "new" ? false : true;
+
   const startingTicketData = {
     title: "",
     description: "",
@@ -11,6 +28,15 @@ const TicketForm = () => {
     status: "Not Started",
     category: "Hardware Problem",
   };
+
+  if (EDITMODE) {
+    startingTicketData.title = ticket.title;
+    startingTicketData.category = ticket.category;
+    startingTicketData.description = ticket.description;
+    startingTicketData.priority = ticket.priority;
+    startingTicketData.progress = ticket.progress;
+    startingTicketData.status = ticket.status;
+  }
 
   const [formData, setFormData] = useState(startingTicketData);
   const [message, setMessage] = useState("");
@@ -31,24 +57,43 @@ const TicketForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("submit: ", formData);
-    const res = await fetch("/api/tickets", {
-      method: "POST",
-      body: JSON.stringify({ formData }),
-      //@ts-ignore
-      "Content-Type": "application/json",
-    });
-    if (!res.ok) {
-      setMessage("Failed to create ticket");
-      throw new Error("Failed to create ticket");
-    } else {
-      setMessage("Ticket successfully created");
-    }
+    if (EDITMODE) {
+      const res = await fetch(`/api/tickets/${ticket._id}`, {
+        method: "PUT",
+        body: JSON.stringify({ formData }),
+        //@ts-ignore
+        "Content-Type": "application/json",
+      });
+      if (!res.ok) {
+        setMessage("Failed to update ticket");
+        throw new Error("Failed to update ticket");
+      } else {
+        setMessage("Ticket successfully updated");
+      }
 
-    setTimeout(() => {
-      router.refresh();
-      router.push("/");
-    }, 4000);
+      setTimeout(() => {
+        router.refresh();
+        router.push("/");
+      }, 4000);
+    } else {
+      const res = await fetch("/api/tickets", {
+        method: "POST",
+        body: JSON.stringify({ formData }),
+        //@ts-ignore
+        "Content-Type": "application/json",
+      });
+      if (!res.ok) {
+        setMessage("Failed to create ticket");
+        throw new Error("Failed to create ticket");
+      } else {
+        setMessage("Ticket successfully created");
+      }
+
+      setTimeout(() => {
+        router.refresh();
+        router.push("/");
+      }, 4000);
+    }
   };
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -68,7 +113,9 @@ const TicketForm = () => {
             <p>{message}</p>
           </div>
         )}
-        <h1 className={`${message ? "mt-4" : ""}`}>Create a Ticket</h1>
+        <h1 className={`${message ? "mt-4" : ""}`}>
+          {EDITMODE ? "Edit your ticket" : "Create a ticket"}
+        </h1>
         <div className="flex flex-col gap-2">
           <label>Title</label>
           <input
@@ -96,32 +143,32 @@ const TicketForm = () => {
             onChange={handleChange}
           >
             <option
-              value="frontend"
+              value="Frontend Development"
               className="font-semibold text-base text-grey-1000"
             >
               Frontend Development
             </option>
             <option
-              value="backend"
+              value="Backend Development"
               className="font-semibold text-base text-grey-1000"
             >
               Backend Development
             </option>
             <option
-              value="devops"
+              value="Devops"
               className="font-semibold text-base text-grey-1000"
             >
               Devops
             </option>
 
             <option
-              value="mobile"
+              value="Mobile Development"
               className="font-semibold text-base text-grey-1000"
             >
               Mobile Development
             </option>
             <option
-              value="tests"
+              value="Testing/QA"
               className="font-semibold text-base text-grey-1000"
             >
               Testing/QA
@@ -196,7 +243,7 @@ const TicketForm = () => {
           <input
             type="submit"
             className=" bg-blue-900 w-[99%] text-white py-1 rounded hover:bg-white hover:text-blue-900 hover:border border-blue-900 hover:shadow-lg transition-all duration-500 ease-in-out"
-            value="Create"
+            value={EDITMODE ? "Edit Ticket" : "Create Ticket"}
           />
         </div>
       </form>
